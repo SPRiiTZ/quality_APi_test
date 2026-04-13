@@ -15,7 +15,7 @@ std::string QualityService::calculateGrade(int score) const {
     if (score >= 90) return "A";
     if (score >= 80) return "B";
     if (score >= 70) return "C";
-    if (score > 60) return "D";
+    if (score >= 60) return "D";
     return "F";
 }
 
@@ -24,7 +24,7 @@ int QualityService::calculateDiscount(const DiscountRequest& request) const {
     if (request.hourOfDay < 0 || request.hourOfDay > 23) return -1;
 
     int discount = 0;
-    if (request.amount > 100) discount = 10;
+    if (request.amount >= 100) discount = 10;
     if (request.amount >= 500) discount = 20;
     if (request.amount >= 1000) discount = 30;
 
@@ -54,7 +54,7 @@ std::string QualityService::formatUsername(const std::string& name) const {
 
 double QualityService::calculateSensorAverage(const std::vector<int>& values) const {
     if (values.empty()) return 0.0;
-    int sum = std::accumulate(values.begin(), values.end(), 0);
+    double sum = std::accumulate(values.begin(), values.end(), 0);
     return static_cast<double>(sum / values.size());
 }
 
